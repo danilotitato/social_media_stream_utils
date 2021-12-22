@@ -10,9 +10,17 @@ def instawar(request):
     current_user_followers = get_profile_followers(current_user)
     rival_user_followers = get_profile_followers(rival_user)
 
-    emote = winning_emote if current_user_followers > rival_user_followers else losing_emote
+    follower_diff = rival_user_followers - current_user_followers
+    diff_response = '. Need {remaining} followers more!'.format(remaining = follower_diff) if follower_diff > 0 else ''
+    emote = losing_emote if follower_diff >= 0 else winning_emote
 
-    response = '{user1} has {followers1} followers vs. {followers2} from {user2} {emote}'.format(user1 = current_user, followers1 = current_user_followers, user2 = rival_user, followers2 = rival_user_followers, emote = emote)
+    response = '{user1} has {followers1} followers vs. {followers2} from {user2} {emote}{diff} Follow me on instagram.com/{user1}'.format(
+        user1 = current_user,
+        followers1 = current_user_followers,
+        user2 = rival_user,
+        followers2 = rival_user_followers,
+        emote = emote,
+        diff = diff_response)
 
     return HttpResponse(response)
 
