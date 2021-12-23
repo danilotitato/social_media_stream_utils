@@ -14,3 +14,9 @@ libhyphen0
 libevdev2
 libgles2
 gstreamer1.0-libav
+libwebp6
+libwebpdemux2
+libgudev-1.0-0
+libgdk-pixbuf2.0-0
+libegl1
+libevent-2.1-6
